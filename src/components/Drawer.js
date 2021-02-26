@@ -19,6 +19,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import NewTask from "./NewTask";
+import UserProfile from "./UserProfile";
 import CardContent from '@material-ui/core/CardContent';
 // ----------------- datos de usuario
 const usuario = {
@@ -161,8 +162,24 @@ export default function PersistentDrawerLeft() {
       </List>
       </div>
       <Divider />
+    
+    
       <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-      <br /><br /><br /><br /><br /><br /><br />
+      <br /><br /><br /><br /><br />
+      <Link to="/UserProfile">
+        <Button className="button"
+          type="submit"
+          fullWidth
+          variant="contained"
+          color="secundary"
+          onClick={() => logout()}
+          className="submit"
+          startIcon={<ExitToApp />}
+        >
+          update profile
+          </Button>
+      </Link>
+      <br /><br />
       <Link to="/Login">
         <Button className="button"
           type="submit"
@@ -176,6 +193,7 @@ export default function PersistentDrawerLeft() {
           Log out
           </Button>
       </Link>
+
     </div>
   );
 

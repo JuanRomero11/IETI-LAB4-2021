@@ -67,7 +67,7 @@ export default class Login extends React.Component {
                                 </Link>
                             </div>
                             <div className="icon">
-                                <Link to="/Account" alignItems="center">
+                                <Link to="/UserProfile" alignItems="center">
                                     <Button
                                         color="primary"
                                         fullWidth
