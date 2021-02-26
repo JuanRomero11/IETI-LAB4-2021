@@ -137,10 +137,7 @@ export default function PersistentDrawerLeft() {
   status:"ready",dueDate: Date.now() }]);
 
   const handleAddTask =(t) =>{
-
     setTask(task.concat(t));
-
-   
   };
 
   const handleDrawerOpen = () => {
