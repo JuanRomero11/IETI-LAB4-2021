@@ -20,7 +20,6 @@ import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import NewTask from "./NewTask";
 import CardContent from '@material-ui/core/CardContent';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
 // ----------------- datos de usuario
 const usuario = {
   "nombre": "Juan",
@@ -78,7 +77,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
     ...theme.mixins.toolbar,
     justifyContent: 'flex-end',
   },
@@ -125,10 +123,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PersistentDrawerLeft() {
   const classes = useStyles();
-  const theme = useTheme();
-  const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
-  const bull = <span className={classes.bullet}>•</span>;
 
   // -------------------- Cerrar sesion
   const logout = () => {
@@ -137,14 +132,20 @@ export default function PersistentDrawerLeft() {
    // window.location.reload();
 
   }
+  const [task,setTask]=React.useState([{description:"Implement Login", responsable:{username:usuario.nombre ,email:usuario.correo}, 
+  status:"ready",dueDate: Date.now() }]);
+
+  const handleAddTask =(t) =>{
+
+    setTask(task.concat(t));
+
+   
+  };
 
   const handleDrawerOpen = () => {
     setOpen(true);
   };
 
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
   const drawer = (
     <div>
       <div className={classes.drawerHeader}>
@@ -222,51 +223,74 @@ export default function PersistentDrawerLeft() {
       >
         {/* <-------------------------- CARDS -------------------------------------------- */}
         <div className={classes.root2}>
-          <Card className={classes.root2} >
-            <CardContent>
-              <Typography variant="h5" component="h5" gutterBottom>
-                Implement Login View
+        <Card className={classes.root2} >
+          <CardContent>
+            <Typography variant="h5" component="h5" gutterBottom>
+              Implement Login View
               </Typography>
-              <Typography variant="h6" component="h6" gutterBottom>
-                In progress - 12-05-2019
+            <Typography variant="h6" component="h6" gutterBottom>
+              In progress - 12-05-2019
               </Typography>
-              <Typography variant="subtitle1" gutterBottom>
-                Juan Romero
+            <Typography variant="subtitle1" gutterBottom>
+              Juan Romero
               </Typography>
-            </CardContent>
-          </Card>
-          <Card className={classes.root2} >
-            <CardContent>
-              <Typography variant="h5" component="h5" gutterBottom>
-                Implement Login Controller
+          </CardContent>
+        </Card>
+        <Card className={classes.root2} >
+          <CardContent>
+            <Typography variant="h5" component="h5" gutterBottom>
+              Implement Login Controller
               </Typography>
-              <Typography variant="h6" component="h6" gutterBottom>
-                Ready - 12-05-2019
+            <Typography variant="h6" component="h6" gutterBottom>
+              Ready - 12-05-2019
               </Typography>
-              <Typography variant="subtitle1" gutterBottom>
-                Juan Romero
+            <Typography variant="subtitle1" gutterBottom>
+              Juan Romero
               </Typography>
-            </CardContent>
-          </Card>
-          <Card className={classes.root2} >
-            <CardContent>
-              <Typography variant="h5" component="h5" gutterBottom>
-                Facebook integration
+          </CardContent>
+        </Card>
+        <Card className={classes.root2} >
+          <CardContent>
+            <Typography variant="h5" component="h5" gutterBottom>
+              Facebook integration
               </Typography>
-              <Typography variant="h6" component="h6" gutterBottom>
-                Completed - 12-05-2019
+            <Typography variant="h6" component="h6" gutterBottom>
+            ready - 12-05-2019
               </Typography>
-              <Typography variant="subtitle1" gutterBottom>
-                Juan Romero
+            <Typography variant="subtitle1" gutterBottom>
+              Juan Romero
               </Typography>
-            </CardContent>
-          </Card>
+          </CardContent>
+        </Card>
+        {/* mapeo de las carts agregadas funcional -------------------------------*/}
+        {task.map(item => (
+         <Card className={classes.root2} variant="outlined" >
+         <CardContent  >
+           <Typography className={classes.title} color="textSecondary" gutterBottom>
+             {item.description}
+           </Typography>
+           <Typography variant="h5" component="h2">
+             {item.responsable.nombre}
+             {<br/>}
+             {item.responsable.email}
+           </Typography>
+           <Typography className={classes.pos} color="textSecondary">
+             {item.status}
+           </Typography>
+           <Typography variant="body2" component="p">
+             {item.dueDate}
+             <br />
+           </Typography>
+         </CardContent>
+       </Card>
+        ))}
+    
         </div>
             {/* <-------------------------- NUEVA TASK -------------------------------------------- */}
         <div>
         
             <IconButton aria-label="delete">
-              <NewTask />
+              <NewTask fun={handleAddTask} />
             </IconButton>
          
         </div>
