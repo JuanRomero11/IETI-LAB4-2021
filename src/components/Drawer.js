@@ -19,7 +19,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import NewTask from "./NewTask";
-import UserProfile from "./UserProfile";
+import Modal from "./Modal";
 import CardContent from '@material-ui/core/CardContent';
 // ----------------- datos de usuario
 const usuario = {
@@ -29,17 +29,6 @@ const usuario = {
 }
 function rand() {
   return Math.round(Math.random() * 20) - 10;
-}
-
-function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
-
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  };
 }
 
 const drawerWidth = 240;
@@ -303,9 +292,15 @@ export default function PersistentDrawerLeft() {
         </div>
             {/* <-------------------------- NUEVA TASK -------------------------------------------- */}
         <div>
-        
             <IconButton aria-label="delete">
               <NewTask fun={handleAddTask} />
+            </IconButton>
+         
+        </div>
+        <div>
+            <IconButton aria-label="add">
+              <Modal fun={handleAddTask} />
+              TaskFilter
             </IconButton>
          
         </div>
